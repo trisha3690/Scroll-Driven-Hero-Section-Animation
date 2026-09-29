@@ -4,11 +4,11 @@ An interactive, production-quality **Scroll-Driven Hero Section Animation** insp
 
 ## Live Demo
 
-https://trisha3690.github.io/Scroll-Driven-Hero-Section-Animation/
+https://trisha3690.github.io/scroll-driven-hero-animation/
 
 ## GitHub Repository
 
-https://github.com/trisha3690/Scroll-Driven-Hero-Section-Animation
+https://github.com/trisha3690/scroll-driven-hero-animation
 
 ---
 

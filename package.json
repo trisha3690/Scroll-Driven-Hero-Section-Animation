@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://trisha3690.github.io/Scroll-Driven-Hero-Section-Animation/",
+  "homepage": "https://trisha3690.github.io/scroll-driven-hero-animation/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
