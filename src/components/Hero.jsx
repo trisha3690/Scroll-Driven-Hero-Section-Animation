@@ -151,7 +151,7 @@ const Hero = () => {
               start: 'top top',
               end: `+=${scrollDistance}`,
               pin: pinnedViewportRef.current,
-              scrub: 1,
+              scrub: 0.6,
               anticipatePin: 1,
               invalidateOnRefresh: true,
               onUpdate: (self) => {
@@ -395,7 +395,7 @@ const Hero = () => {
             className="hidden md:inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-slate-300 hover:text-volt transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-volt rounded-full px-3 py-1 border border-white/10 hover:border-volt/40"
           >
             Explore Specs
-            <span aria-hidden="true">↓</span>
+            <span aria-hidden="true">â†“</span>
           </a>
         </header>
 
@@ -522,7 +522,7 @@ const Hero = () => {
               </span>
               <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-slate-400">
                 {reducedMotion
-                  ? 'REDUCED MOTION ACTIVE — STATIC TELEMETRY VIEW'
+                  ? 'REDUCED MOTION ACTIVE â€” STATIC TELEMETRY VIEW'
                   : 'SCROLL DOWN TO DRIVE THE TELEMETRY TIMELINE'}
               </span>
             </div>
