@@ -1,94 +1,187 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from './components/Hero';
+import { SCROLL_STAGES } from './assets/hypercarAsset';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
+  const aboutSectionRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const mm = gsap.matchMedia();
+
+    const ctx = gsap.context(() => {
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.fromTo(
+          '[data-about-reveal]',
+          { opacity: 0, y: 36 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            stagger: 0.14,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: aboutSectionRef.current,
+              start: 'top 78%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      });
+    }, aboutSectionRef);
+
+    return () => {
+      ctx.revert();
+      mm.revert();
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen bg-[#121212] text-white antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-obsidian-950 text-white selection:bg-volt selection:text-obsidian-950">
       <main>
         <Hero />
 
-        {/* Secondary Section: About the Experience */}
         <section
-          id="about"
-          className="py-24 sm:py-32 px-5 sm:px-8 bg-[#121212] border-t border-neutral-800"
+          ref={aboutSectionRef}
+          id="about-experience"
+          className="relative z-20 py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-white/10 bg-gradient-to-b from-obsidian-950 via-obsidian-900 to-obsidian-950"
+          aria-labelledby="about-heading"
         >
-          <div className="max-w-5xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#45db7d] mb-3">
-              About the Experience
-            </p>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight max-w-3xl">
-              A modern interactive experience built with React, GSAP and ScrollTrigger.
-            </h2>
-            <p className="mt-5 text-base sm:text-lg text-neutral-400 leading-relaxed max-w-2xl">
-              As you scroll through the hero track, the McLaren 720S drives across the viewport,
-              revealing the headline trail and surfacing key operational metrics in real time
-              with smooth scrub interpolation.
-            </p>
+          <div className="max-w-7xl mx-auto">
+            <div className="max-w-3xl" data-about-reveal>
+              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-volt px-3 py-1 rounded-full bg-volt/10 border border-volt/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-volt" />
+                ABOUT THE EXPERIENCE
+              </span>
 
-            <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 border-t border-neutral-800">
-              <div>
-                <div className="text-2xl font-bold text-[#def54f]">58%</div>
-                <div className="mt-1 text-sm font-medium text-white">Pickup Point Growth</div>
-                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
-                  Streamlined hub routing increases self-service pickup adoption across urban zones.
-                </p>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#6ac9ff]">23%</div>
-                <div className="mt-1 text-sm font-medium text-white">Fewer Support Calls</div>
-                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
-                  Live arrival tracking reduces inbound status inquiries during peak delivery hours.
-                </p>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#fa7328]">40%</div>
-                <div className="mt-1 text-sm font-medium text-white">Faster Turnaround</div>
-                <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
-                  Coordinated curb-to-locker handoffs cut average wait times nearly in half.
-                </p>
-              </div>
+              <h2
+                id="about-heading"
+                className="mt-5 font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08]"
+              >
+                A modern interactive experience built with{' '}
+                <span className="bg-gradient-to-r from-volt via-volt-lime to-volt-cyan bg-clip-text text-transparent">
+                  React, GSAP &amp; ScrollTrigger.
+                </span>
+              </h2>
+
+              <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed">
+                Designed as a precision scrollytelling showcase, the hero section locks into the
+                viewport while tying every visual transformationâ€”horizontal translation, aerodynamic
+                banking rotation, dynamic scaling, slipstream trail expansion, and sequential
+                telemetry cardsâ€”directly to your scrollbar position with{' '}
+                <code className="font-mono text-sm text-volt-lime bg-white/5 px-2 py-0.5 rounded">
+                  scrub: 1
+                </code>{' '}
+                interpolation.
+              </p>
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center gap-4">
-              <button
-                type="button"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-6 py-3 rounded-lg bg-[#45db7d] text-[#111111] font-semibold text-sm hover:bg-[#3bc76f] transition-colors"
-              >
-                Back to Top ↑
-              </button>
-              <a
-                href="https://github.com/trisha3690/Scroll-Driven-Hero-Section-Animation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded-lg border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-white font-medium text-sm transition-colors"
-              >
-                View on GitHub ↗
-              </a>
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {SCROLL_STAGES.map((item) => (
+                <article
+                  key={item.stage}
+                  data-about-reveal
+                  className="reduced-motion-visible rounded-2xl bg-obsidian-800/70 border border-white/10 hover:border-volt/40 p-6 transition-colors flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <span className="font-mono text-xs font-bold tracking-[0.22em] text-volt">
+                        STAGE {item.stage}
+                      </span>
+                      <span className="font-mono text-[11px] text-slate-400 bg-white/5 px-2.5 py-0.5 rounded-full border border-white/10">
+                        {item.range}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-bold text-white tracking-wide">
+                      {item.name}
+                    </h3>
+                    <p className="mt-2.5 text-sm text-slate-300 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-400">
+                    <span>INTERACTION</span>
+                    <span className="text-volt-lime">Smooth Scroll</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div
+              data-about-reveal
+              className="reduced-motion-visible mt-14 rounded-3xl bg-gradient-to-r from-obsidian-800/90 via-obsidian-900/95 to-obsidian-800/90 border border-white/10 p-6 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
+            >
+              <div className="space-y-2 max-w-2xl">
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-volt-cyan">
+                  PERFORMANCE &amp; ACCESSIBILITY VERIFIED
+                </span>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-white">
+                  60fps GPU-Accelerated Motion &amp; Responsive Breakpoints
+                </h3>
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                  All animations avoid layout thrashing by exclusively mutating{' '}
+                  <code className="font-mono text-xs text-volt">transform</code> (
+                  <code className="font-mono text-xs text-slate-200">
+                    translate3d, scale, scaleX, rotate
+                  </code>
+                  ) and <code className="font-mono text-xs text-volt">opacity</code>, while
+                  automatically adapting travel distances across desktop, tablet, and mobile screens
+                  and honoring <code className="font-mono text-xs text-volt-lime">prefers-reduced-motion</code>.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleScrollToTop}
+                  className="inline-flex items-center gap-2.5 rounded-full bg-volt text-obsidian-950 font-display font-bold text-sm px-6 py-3.5 hover:bg-volt-lime transition-colors shadow-volt-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-volt-lime"
+                >
+                  Replay Scroll Animation
+                  <span aria-hidden="true">â†‘</span>
+                </button>
+                <a
+                  href="https://github.com/trisha3690/Scroll-Driven-Hero-Section-Animation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-xs uppercase tracking-[0.18em] px-5 py-3.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-volt"
+                >
+                  GitHub Repository â†—
+                </a>
+              </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="py-8 px-5 sm:px-8 border-t border-neutral-900 bg-[#0d0d0d] text-xs text-neutral-500">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span>© {new Date().getFullYear()} ItzFizz — Scroll-Driven Hero Animation</span>
-          <div className="flex items-center gap-5">
+      <footer className="border-t border-white/10 bg-obsidian-950 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
+          <div>
+            <span>ITZ FIZZ // SCROLL-DRIVEN HERO ANIMATION</span>
+          </div>
+          <div className="flex items-center gap-6">
             <a
               href="https://github.com/trisha3690"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-neutral-300 transition-colors"
+              className="hover:text-volt transition-colors"
             >
-              @trisha3690
+              GitHub: @trisha3690
             </a>
             <a
               href="https://github.com/trisha3690/Scroll-Driven-Hero-Section-Animation"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-neutral-300 transition-colors"
+              className="hover:text-volt-lime transition-colors"
             >
-              GitHub Repository
+              Source Code
             </a>
           </div>
         </div>
@@ -98,3 +191,4 @@ const App = () => {
 };
 
 export default App;
+
