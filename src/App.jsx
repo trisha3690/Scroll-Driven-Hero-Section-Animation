@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+﻿import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from './components/Hero';
@@ -73,9 +73,9 @@ const App = () => {
 
               <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed">
                 Designed as a precision scrollytelling showcase, the hero section locks into the
-                viewport while tying every visual transformation—horizontal translation, aerodynamic
+                viewport while tying every visual transformationâ€”horizontal translation, aerodynamic
                 banking rotation, dynamic scaling, slipstream trail expansion, and sequential
-                telemetry cards—directly to your scrollbar position with{' '}
+                telemetry cardsâ€”directly to your scrollbar position with{' '}
                 <code className="font-mono text-sm text-volt-lime bg-white/5 px-2 py-0.5 rounded">
                   scrub: 1
                 </code>{' '}
@@ -145,7 +145,7 @@ const App = () => {
                   className="inline-flex items-center gap-2.5 rounded-full bg-volt text-obsidian-950 font-display font-bold text-sm px-6 py-3.5 hover:bg-volt-lime transition-colors shadow-volt-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-volt-lime"
                 >
                   Replay Scroll Animation
-                  <span aria-hidden="true">↑</span>
+                  <span aria-hidden="true">â†‘</span>
                 </button>
                 <a
                   href="https://github.com/trisha3690/Scroll-Driven-Hero-Section-Animation"
@@ -153,7 +153,7 @@ const App = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-xs uppercase tracking-[0.18em] px-5 py-3.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-volt"
                 >
-                  GitHub Repository ↗
+                  GitHub Repository â†—
                 </a>
               </div>
             </div>
@@ -176,7 +176,7 @@ const App = () => {
               GitHub: @trisha3690
             </a>
             <a
-              href="https://github.com/trisha3690/scroll-driven-hero-animation"
+              href="https://github.com/trisha3690/Scroll-Driven-Hero-Section-Animation"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-volt-lime transition-colors"
@@ -191,3 +191,4 @@ const App = () => {
 };
 
 export default App;
+
