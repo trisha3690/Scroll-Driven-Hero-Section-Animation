@@ -148,7 +148,7 @@ const App = () => {
                   <span aria-hidden="true">↑</span>
                 </button>
                 <a
-                  href="https://github.com/trisha3690/scroll-driven-hero-animation"
+                  href="https://github.com/trisha3690/Scroll-Driven-Hero-Section-Animation"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-xs uppercase tracking-[0.18em] px-5 py-3.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-volt"
